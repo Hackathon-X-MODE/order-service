@@ -1,5 +1,4 @@
 FROM gradle:8.1.0-jdk17 AS build
-ARG GITHUB_TOKEN_CI
 MAINTAINER Alexander <BigTows> Chapchuk
 COPY --chown=gradle:gradle . /home/gradle/project
 WORKDIR /home/gradle/project
