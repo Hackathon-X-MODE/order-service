@@ -32,7 +32,7 @@ spec:
     spec:
       containers:
         - name: order-service
-          image: ghcr.io/hackathon-x-mode/backend/order:{{ .Values.image.tag }}
+          image: ghcr.io/hackathon-x-mode/order-service:main
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
