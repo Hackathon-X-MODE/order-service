@@ -7,6 +7,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ExampleApplication {
 
     public static void main(String[] args) {
+
+        System.out.println("Updated!");
         SpringApplication.run(ExampleApplication.class, args);
     }
 
