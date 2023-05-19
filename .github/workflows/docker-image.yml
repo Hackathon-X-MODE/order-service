@@ -64,3 +64,13 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+      - name: Checkout service
+        uses: actions/checkout@v2
+      - uses: ivido/helm-deploy@v1
+        with:
+          release: order-service
+          namespace: default
+          timeout: 400s
+          chart: .
+        env:
+          KUBECONFIG_FILE: ${{ secrets.KUBECONFIG }}
