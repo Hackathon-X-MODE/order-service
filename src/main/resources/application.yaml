@@ -8,8 +8,11 @@ spring:
     driver-class-name: org.postgresql.Driver
   liquibase:
     change-log: classpath:/db/master.xml
+  jpa:
+    hibernate:
+      ddl-auto: update
 server:
-  port: ${SERVER_HTTP_PORT:8080}
+  port: ${SERVER_HTTP_PORT:8081}
 springdoc:
   swagger-ui:
     path: /swagger-ui.html
