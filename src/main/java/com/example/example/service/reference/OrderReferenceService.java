@@ -44,4 +44,9 @@ public class OrderReferenceService {
                 ).getOrder()
         );
     }
+
+    @Transactional
+    public void deleteKey(String key) {
+        this.orderReferenceRepository.deleteById(key);
+    }
 }

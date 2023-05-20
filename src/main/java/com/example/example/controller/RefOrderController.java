@@ -4,10 +4,7 @@ import com.example.example.model.OrderWithMetaDto;
 import com.example.example.service.reference.OrderReferenceService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("refs")
@@ -23,5 +20,10 @@ public class RefOrderController {
             @PathVariable("key") String key
     ) {
         return this.orderReferenceService.byKey(key);
+    }
+
+    @DeleteMapping("{key}")
+    public void delete(@PathVariable("key") String key) {
+        this.orderReferenceService.deleteKey(key);
     }
 }
