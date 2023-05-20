@@ -2,6 +2,7 @@ package com.example.example.client;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -34,6 +35,7 @@ public class VendorClient {
                 .block()).id;
     }
 
+    @Data
     @Builder
     @NoArgsConstructor
     @AllArgsConstructor

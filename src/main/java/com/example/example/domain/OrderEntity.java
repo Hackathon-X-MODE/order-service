@@ -45,7 +45,7 @@ public class OrderEntity {
     private Person person;
 
 
-    @Column(name = "vendor_id")
+    @Column(name = "vendor_id", nullable = false)
     private UUID vendorId;
 
     @Column(name = "postamat_id")

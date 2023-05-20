@@ -3,6 +3,8 @@ package com.example.example.service.reference;
 import com.example.example.domain.OrderEntity;
 import com.example.example.domain.ref.OrderReference;
 import com.example.example.exception.EntityNotFoundException;
+import com.example.example.mapper.OrderMapper;
+import com.example.example.model.OrderWithMetaDto;
 import com.example.example.repository.OrderReferenceRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +21,8 @@ public class OrderReferenceService {
 
     private final OrderReferenceRepository orderReferenceRepository;
 
+    private final OrderMapper orderMapper;
+
     @Transactional
     public String generate(OrderEntity order) {
 
@@ -33,9 +37,11 @@ public class OrderReferenceService {
     }
 
     @Transactional(readOnly = true)
-    public OrderEntity byKey(String key) {
-        return this.orderReferenceRepository.findById(key).orElseThrow(
-                () -> new EntityNotFoundException("Can't find order by key: " + key)
-        ).getOrder();
+    public OrderWithMetaDto byKey(String key) {
+        return this.orderMapper.toDto(
+                this.orderReferenceRepository.findById(key).orElseThrow(
+                        () -> new EntityNotFoundException("Can't find order by key: " + key)
+                ).getOrder()
+        );
     }
 }

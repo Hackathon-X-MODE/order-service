@@ -5,6 +5,7 @@ import com.example.example.domain.OrderEntity;
 import com.example.example.domain.OrderMeta;
 import com.example.example.domain.Person;
 import com.example.example.model.OrderDto;
+import com.example.example.model.OrderWithMetaDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
@@ -35,4 +36,8 @@ public interface OrderMapper {
     @Mapping(target = "depth", source = "depth", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @Mapping(target = "weight", source = "weight", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void update(@MappingTarget OrderMeta meta, OrderMeta metaFromDto);
+
+
+    @Mapping(target = "status", source = "statusOrder")
+    OrderWithMetaDto toDto(OrderEntity orderEntity);
 }
