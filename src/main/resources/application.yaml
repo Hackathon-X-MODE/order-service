@@ -21,4 +21,4 @@ springdoc:
   swagger-ui:
     path: /swagger-ui.html
   api-docs:
-    path: /api-docs
+    path: ${SERVER_SWAGGER_ORDER:/api-docs}
