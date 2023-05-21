@@ -1,6 +1,6 @@
 package com.example.example.controller;
 
-import com.example.example.config.WebConstants;
+import com.example.example.configuration.WebConstants;
 import com.example.example.model.OrderDto;
 import com.example.example.service.OrderInitService;
 import com.example.example.service.OrderStatusService;

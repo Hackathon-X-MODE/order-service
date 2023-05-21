@@ -1,6 +1,6 @@
 package com.example.example.controller;
 
-import com.example.example.config.WebConstants;
+import com.example.example.configuration.WebConstants;
 import com.example.example.service.importer.ExcelImportService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
