@@ -14,6 +14,7 @@ import java.util.List;
 @Configuration
 public class SpringDocConfiguration {
 
+
     @Bean
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
