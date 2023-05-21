@@ -68,7 +68,7 @@ public class ExcelImportService {
                         );
                         log.info("Comment sent");
                     } catch (Throwable throwable) {
-                        log.error("Order can't be processed! {} '{}'", order.getExternalId(), comment);
+                        log.error("Order can't be processed! {} '{}'", order.getExternalId(), comment, throwable);
                     }
                 });
     }
