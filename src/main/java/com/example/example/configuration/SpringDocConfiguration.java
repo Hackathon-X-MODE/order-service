@@ -34,7 +34,7 @@ public class SpringDocConfiguration {
                 .servers(
                         List.of(
                                 new Server()
-                                        .url("https://back-hack.bigtows.org/tickets")
+                                        .url("https://back-hack.bigtows.org/orders")
                                         .description("Production"),
                                 new Server()
                                         .url("http://127.0.0.1:8084")
