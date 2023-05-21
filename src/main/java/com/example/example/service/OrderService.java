@@ -34,6 +34,11 @@ public class OrderService {
         );
     }
 
+    @Transactional
+    public void delete(OrderEntity e){
+        this.orderRepository.delete(e);
+    }
+
 
     @Transactional
     public OrderEntity get(UUID vendorId, String externalId) {

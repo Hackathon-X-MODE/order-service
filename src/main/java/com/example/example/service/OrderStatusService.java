@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.UUID;
+
 @Service
 @RequiredArgsConstructor
 public class OrderStatusService {
@@ -24,9 +26,15 @@ public class OrderStatusService {
     @Transactional
     public String finishWithComment(String vendorCode, String externalOrderId) {
         final var vendor = this.vendorClient.getVendorId(vendorCode);
-        final var order = this.orderService.get(vendor, externalOrderId);
+        return FEEDBACK_URL + this.finishWithComment(vendor, externalOrderId);
+    }
+
+
+    @Transactional
+    public String finishWithComment(UUID vendorId, String externalOrderId) {
+        final var order = this.orderService.get(vendorId, externalOrderId);
 
         this.statusUpdaterService.update(order, StatusOrder.FINISHED);
-        return FEEDBACK_URL + this.orderReferenceService.generate(order);
+        return this.orderReferenceService.generate(order);
     }
 }
