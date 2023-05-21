@@ -39,7 +39,7 @@ public class OrderService {
     }
 
 
-    @Transactional
+    @Transactional(readOnly = true)
     public OrderWithMetaDto get(UUID orderId) {
         return this.orderMapper.toDto(
                 this.orderRepository.findById(orderId)
