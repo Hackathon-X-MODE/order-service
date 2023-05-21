@@ -37,7 +37,7 @@ public class SpringDocConfiguration {
                                         .url("https://back-hack.bigtows.org/orders")
                                         .description("Production"),
                                 new Server()
-                                        .url("http://127.0.0.1:8084")
+                                        .url("http://127.0.0.1:8081")
                                         .description("Dev")
                         )
                 );
