@@ -2,6 +2,7 @@ package com.example.example.controller;
 
 import com.example.example.configuration.WebConstants;
 import com.example.example.model.OrderDto;
+import com.example.example.service.OrderExtendService;
 import com.example.example.service.OrderInitService;
 import com.example.example.service.OrderStatusService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -21,6 +22,8 @@ public class ExternalOrderController {
 
 
     private final OrderStatusService orderStatusService;
+
+    private final OrderExtendService orderExtendService;
 
     @PatchMapping
     @ResponseStatus(HttpStatus.ACCEPTED)
@@ -45,5 +48,18 @@ public class ExternalOrderController {
             @PathVariable("orderId") String orderExternalId
     ) {
         return this.orderStatusService.finishWithComment(externalId, orderExternalId);
+    }
+
+    @Operation(
+            summary = "Продлить время ожидание для заказа",
+            description = "Для заказа будет записана новая дата хранения."
+    )
+    @PutMapping("{orderId}/extend")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public void extend(
+            @RequestHeader(WebConstants.Header.EXTERNAL_SYSTEM) String vendorCode,
+            @PathVariable("orderId") String orderExternalId
+    ){
+        this.orderExtendService.extend(vendorCode, orderExternalId);
     }
 }
