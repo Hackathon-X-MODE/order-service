@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.net.URL;
-import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -33,7 +32,7 @@ public class OrderWithMetaDto {
 
     private Person person;
 
-    private List<String> categories;
+    private String description;
 
     private OrderMeta meta;
 

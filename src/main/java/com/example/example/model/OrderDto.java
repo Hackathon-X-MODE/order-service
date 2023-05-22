@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.net.URL;
-import java.util.List;
 
 @Data
 @Builder
@@ -28,7 +27,7 @@ public class OrderDto {
 
     private Person person;
 
-    private List<String> categories;
+    private String description;
 
     private OrderMeta meta;
 

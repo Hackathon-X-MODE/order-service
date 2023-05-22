@@ -19,7 +19,7 @@ public interface OrderMapper {
     @Mapping(target = "statusOrder", ignore = true)
     @Mapping(target = "sum", source = "sum", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @Mapping(target = "person", source = "person", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    @Mapping(target = "categories", source = "categories", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    @Mapping(target = "description", source = "description", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @Mapping(target = "meta", source = "meta", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @Mapping(target = "ref", source = "ref", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     OrderEntity update(@MappingTarget OrderEntity order, OrderDto orderDto);

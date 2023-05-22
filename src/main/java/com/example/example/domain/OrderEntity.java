@@ -1,16 +1,13 @@
 package com.example.example.domain;
 
-import io.hypersistence.utils.hibernate.type.json.JsonType;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
-import org.hibernate.annotations.Type;
 
 import java.math.BigDecimal;
 import java.net.URL;
-import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -51,9 +48,8 @@ public class OrderEntity {
     @Column(name = "postamat_id")
     private UUID postamatId;
 
-    @Type(JsonType.class)
-    @Column(name = "categories", columnDefinition = "jsonb")
-    private List<String> categories;
+    @Column(name = "description", columnDefinition = "varchar(4096)")
+    private String description;
 
 
     @Embedded
