@@ -43,9 +43,7 @@ public class ExcelImportService {
         final var currentNano = LocalDateTime.now().getNano();
         final var atomic = new AtomicLong(1);
         final var rand = new Random();
-        rowStream
-                .skip(1)
-                .parallel()
+        rowStream.skip(1).parallel()
                 .forEach(row -> {
                     final var comment = row.cell(0).asString();
                     if (comment == null || comment.isBlank()) {
