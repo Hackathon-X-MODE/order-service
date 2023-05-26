@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -35,7 +36,7 @@ public class OrderService {
     }
 
     @Transactional
-    public void delete(OrderEntity e){
+    public void delete(OrderEntity e) {
         this.orderRepository.delete(e);
     }
 
@@ -58,6 +59,7 @@ public class OrderService {
         );
     }
 
+
     @Transactional(readOnly = true)
     public Page<OrderWithMetaDto> get(OrderFilter filter, Pageable pageable) {
         final var page = this.orderRepository.filter(filter, pageable);
@@ -67,5 +69,10 @@ public class OrderService {
                         .toList(),
                 pageable, page.getTotalElements()
         );
+    }
+
+    @Transactional(readOnly = true)
+    public List<OrderWithMetaDto> get(List<UUID> ids) {
+        return this.orderRepository.findAllById(ids).stream().map(this.orderMapper::toDto).toList();
     }
 }

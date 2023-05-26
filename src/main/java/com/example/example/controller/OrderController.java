@@ -7,11 +7,9 @@ import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -25,6 +23,12 @@ public class OrderController {
     @GetMapping("{orderId}")
     public OrderWithMetaDto get(@PathVariable("orderId") UUID orderId) {
         return this.orderService.get(orderId);
+    }
+
+    @Operation(summary = "Получение заказов по списку ID")
+    @PostMapping("/list")
+    public List<OrderWithMetaDto> get(@RequestBody List<UUID> ids) {
+        return this.orderService.get(ids);
     }
 
     @Operation(summary = "Получение заказа по фильтрам")
