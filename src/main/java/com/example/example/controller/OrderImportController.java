@@ -25,7 +25,7 @@ public class OrderImportController {
                     "По системе будет разлиты следующие данные: Комментарий, Оценка, Номер заказа (будет сгенерирован, если отсутствовал)")
     @PostMapping(value = "/xlsx", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public void importViaExcel(@RequestHeader(WebConstants.Header.EXTERNAL_SYSTEM) String vendorCode,
+    public void importViaExcel(@RequestPart(WebConstants.Header.EXTERNAL_SYSTEM) String vendorCode,
                                @RequestPart("file") MultipartFile file) throws IOException {
         this.excelImportService.importFile(vendorCode, file.getBytes());
     }
