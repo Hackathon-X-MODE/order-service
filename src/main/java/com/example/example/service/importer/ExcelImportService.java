@@ -11,9 +11,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Optional;
@@ -36,11 +34,11 @@ public class ExcelImportService {
     private final CommentClient commentClient;
 
     @Async
-    public void importFile(String vendorCode, MultipartFile file) throws IOException {
+    public void importFile(String vendorCode, byte[] bytes) {
 
         final var vendorId = Objects.requireNonNull(this.vendorClient.getVendorId(vendorCode));
 
-        try (final var rowStream = Windmill.parse(FileSource.of(file.getInputStream()))) {
+        try (final var rowStream = Windmill.parse(FileSource.of(bytes))) {
             this.processStreamRow(rowStream, vendorId);
         }
     }

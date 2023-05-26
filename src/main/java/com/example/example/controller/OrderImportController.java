@@ -27,7 +27,7 @@ public class OrderImportController {
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void importViaExcel(@RequestHeader(WebConstants.Header.EXTERNAL_SYSTEM) String vendorCode,
                                @RequestPart("file") MultipartFile file) throws IOException {
-        this.excelImportService.importFile(vendorCode, file);
+        this.excelImportService.importFile(vendorCode, file.getBytes());
     }
 
 }
