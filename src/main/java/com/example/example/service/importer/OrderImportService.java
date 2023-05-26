@@ -30,7 +30,7 @@ public class OrderImportService {
 
     @Transactional
     public void importOrder(UUID vendorId, UUID postamatId, String externalOrderId) {
-        final var order = this.orderService.create(vendorId, externalOrderId);
+        final var order = this.orderService.get(vendorId, externalOrderId);
         final var random = new Random();
         order
                 .setPerson(
@@ -47,7 +47,7 @@ public class OrderImportService {
                         .setDepth(random.nextInt(1000) + 1)
                         .setWidth(random.nextInt(1000) + 1)
                         .setHeight(random.nextInt(1000) + 1)
-                        .setWidth(random.nextInt(5000) + 1)
+                        .setWeight(random.nextInt(5000) + 1)
                 )
                 .setPostamatId(postamatId)
                 .setDateHistory(

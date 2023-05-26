@@ -33,8 +33,10 @@ public class ExcelImportService {
         final var postamats = this.vendorClient.getPostamatIdsByVendor(vendorId);
 
         try (final var rowStream = Windmill.parse(FileSource.of(bytes))) {
+            log.info("Import started");
             this.processStreamRow(rowStream, vendorId, postamats);
         }
+        log.info("Import end");
     }
 
     private void processStreamRow(Stream<Row> rowStream, UUID vendorId, List<UUID> postamats) {
@@ -62,7 +64,6 @@ public class ExcelImportService {
                                 comment,
                                 row.cell(2).asDouble().safeValue()
                         );
-
                     } catch (Throwable t) {
                         log.error("Order can't be processed! {} '{}'", externalOrderId, comment, t);
                     }
