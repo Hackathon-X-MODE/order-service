@@ -54,10 +54,15 @@ public class ExcelImportService {
                         this.orderImportService.importOrder(
                                 vendorId,
                                 postamats.get(rand.nextInt(postamats.size())),
+                                externalOrderId
+                        );
+                        this.orderImportService.finishOrder(
+                                vendorId,
                                 externalOrderId,
                                 comment,
                                 row.cell(2).asDouble().safeValue()
                         );
+
                     } catch (Throwable t) {
                         log.error("Order can't be processed! {} '{}'", externalOrderId, comment, t);
                     }

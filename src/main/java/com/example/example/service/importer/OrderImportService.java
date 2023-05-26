@@ -23,12 +23,13 @@ import java.util.UUID;
 public class OrderImportService {
 
     private final OrderService orderService;
+
     private final OrderStatusService orderStatusService;
 
     private final CommentClient commentClient;
 
     @Transactional
-    public void importOrder(UUID vendorId, UUID postamatId, String externalOrderId, String comment, double rate) {
+    public void importOrder(UUID vendorId, UUID postamatId, String externalOrderId) {
         final var order = this.orderService.create(vendorId, externalOrderId);
         final var random = new Random();
         order
@@ -53,10 +54,11 @@ public class OrderImportService {
                         new DateHistory()
                                 .setGet(LocalDateTime.now())
                 );
-
-        final var client = this.orderStatusService.finishWithComment(vendorId, order.getExternalId());
         log.info("Created order {}", order.getExternalId());
+    }
 
+    public void finishOrder(UUID vendorId, String externalOrderId, String comment, double rate) {
+        final var client = this.orderStatusService.finishWithComment(vendorId, externalOrderId);
         this.commentClient.createComment(client, comment, rate);
         log.info("Comment sent");
     }
