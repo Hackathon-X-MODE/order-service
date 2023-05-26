@@ -9,6 +9,7 @@ import com.example.example.service.OrderService;
 import com.example.example.service.OrderStatusService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -34,6 +35,7 @@ public class ExcelImportService {
 
     private final CommentClient commentClient;
 
+    @Async
     public void importFile(String vendorCode, MultipartFile file) throws IOException {
 
         final var vendorId = Objects.requireNonNull(this.vendorClient.getVendorId(vendorCode));
@@ -47,6 +49,7 @@ public class ExcelImportService {
         final var currentNano = LocalDateTime.now().getNano();
         rowStream
                 .skip(1)
+                .parallel()
                 .forEach(row -> {
                     final var comment = row.cell(0).asString();
                     if (comment == null || comment.isBlank()) {
