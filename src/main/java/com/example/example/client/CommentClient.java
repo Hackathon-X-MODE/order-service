@@ -23,9 +23,9 @@ public class CommentClient {
 
     public void createComment(String key, String comment, double rate) {
         this.webClient.post()
-                .header("X-Ref-Order", key)
                 .bodyValue(
                         Map.of(
+                                "code", key,
                                 "source", "QR",
                                 "comment", comment,
                                 "rate", rate
