@@ -13,7 +13,7 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class OrderStatusService {
-    private static final String FEEDBACK_URL = "https://hack.bigtows.org/feedback/";
+    private static final String FEEDBACK_URL = "https://hack.bigtows.org/mobile/";
 
     private final VendorClient vendorClient;
 
