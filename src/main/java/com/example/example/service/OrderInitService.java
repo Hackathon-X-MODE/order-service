@@ -48,16 +48,16 @@ public class OrderInitService {
         if (postamatMetaDto == null) {
             return null;
         }
-        log.info("Try get postamatId at {} with {}", postamatMetaDto.getVendorCode(), postamatMetaDto.getVendorCode());
+        log.info("Try get postamatId at {} with {}", postamatMetaDto.getVendorCode(), postamatMetaDto.getPostamatExternalId());
         if (postamatMetaDto.getVendorCode() == null || postamatMetaDto.getPostamatExternalId() == null) {
+            log.info("Postamat not present ignore.");
             return null;
         }
 
         try {
-            return this.postamatClient.getPostamatId(
-                    this.vendorClient.getVendorId(postamatMetaDto.getVendorCode()),
-                    postamatMetaDto.getPostamatExternalId()
-            );
+            final var vendorId = this.vendorClient.getVendorId(postamatMetaDto.getVendorCode());
+            log.info("Loaded vendor {}" ,vendorId);
+            return this.postamatClient.getPostamatId(vendorId, postamatMetaDto.getPostamatExternalId());
         } catch (Exception e) {
             log.warn("Can't get postamat...");
             return null;
