@@ -38,6 +38,7 @@ public class OrderInitService {
         this.statusUpdaterService.update(order, orderDto.getStatus());
         this.orderMapper.update(order, orderDto);
         if (postamatId != null) {
+            log.info("Attached postamat {} to order", postamatId);
             order.setPostamatId(postamatId);
         }
 
@@ -56,7 +57,7 @@ public class OrderInitService {
 
         try {
             final var vendorId = this.vendorClient.getVendorId(postamatMetaDto.getVendorCode());
-            log.info("Loaded vendor {}" ,vendorId);
+            log.info("Loaded vendor {}", vendorId);
             return this.postamatClient.getPostamatId(vendorId, postamatMetaDto.getPostamatExternalId());
         } catch (Exception e) {
             log.warn("Can't get postamat...");

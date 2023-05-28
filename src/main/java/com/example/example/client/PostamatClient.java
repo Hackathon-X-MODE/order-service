@@ -2,6 +2,7 @@ package com.example.example.client;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -38,6 +39,7 @@ public class PostamatClient {
         }
     }
 
+    @Data
     @Builder
     @NoArgsConstructor
     @AllArgsConstructor
