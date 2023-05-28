@@ -17,6 +17,7 @@ public class DeliveredStatusHandler implements StatusHandler {
             return;
         }
         log.info("Order {} waiting person!", order.getId());
+        order.getDateHistory().setReceive(LocalDateTime.now());
         order.getDateHistory().getStorage().add(LocalDateTime.now());
     }
 }

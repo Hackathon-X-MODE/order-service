@@ -17,6 +17,6 @@ public class FinishedStatusHandler implements StatusHandler {
             return;
         }
         log.info("Order {} finished!", order.getId());
-        order.getDateHistory().setReceive(LocalDateTime.now());
+        order.getDateHistory().setGet(LocalDateTime.now());
     }
 }
