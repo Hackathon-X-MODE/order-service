@@ -55,7 +55,7 @@ public class OrderEntity {
     @Embedded
     private OrderMeta meta;
 
-    @Column(name = "ref")
+    @Column(name = "ref", columnDefinition = "varchar(4096)")
     private URL ref;
 
 

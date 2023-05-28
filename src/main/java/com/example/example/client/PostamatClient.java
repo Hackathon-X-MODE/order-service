@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.lang.Nullable;
@@ -13,6 +14,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import java.util.Objects;
 import java.util.UUID;
 
+@Slf4j
 @Component
 public class PostamatClient {
 
@@ -30,11 +32,12 @@ public class PostamatClient {
     public UUID getPostamatId(UUID vendorId, String externalId) {
         try {
             return Objects.requireNonNull(this.webClient.get()
-                    .uri(uriBuilder -> uriBuilder.path("{vendorId}/postamats/externalIds/{externalId}").build(vendorId, externalId))
+                    .uri(uriBuilder -> uriBuilder.path("/{vendorId}/postamates/externalIds/{externalId}").build(vendorId, externalId))
                     .retrieve()
                     .bodyToMono(PostamatDto.class)
                     .block()).id;
         } catch (Exception e) {
+            log.error("Error while getting postamat at vendor {} with external id {}", vendorId, externalId, e);
             return null;
         }
     }
