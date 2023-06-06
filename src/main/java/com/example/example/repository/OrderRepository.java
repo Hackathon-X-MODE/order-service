@@ -32,12 +32,12 @@ public interface OrderRepository extends JpaRepository<OrderEntity, UUID>, JpaSp
             );
         }
 
-        if (Objects.nonNull(filter.getPostamateId())) {
+        if (Objects.nonNull(filter.getPostamatId())) {
             specification = specification.and(
                     (root, query, criteriaBuilder) ->
                             criteriaBuilder.equal(
                                     root.get("postamatId"),
-                                    filter.getPostamateId()
+                                    filter.getPostamatId()
                             )
             );
         }

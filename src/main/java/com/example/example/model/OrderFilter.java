@@ -16,7 +16,7 @@ public class OrderFilter {
 
     private String orderId;
 
-    private UUID postamateId;
+    private UUID postamatId;
 
     private StatusOrder status;
 }
