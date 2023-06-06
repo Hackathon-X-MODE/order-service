@@ -32,6 +32,26 @@ public interface OrderRepository extends JpaRepository<OrderEntity, UUID>, JpaSp
             );
         }
 
+        if (Objects.nonNull(filter.getPostamateId())) {
+            specification = specification.and(
+                    (root, query, criteriaBuilder) ->
+                            criteriaBuilder.equal(
+                                    root.get("postamatId"),
+                                    filter.getPostamateId()
+                            )
+            );
+        }
+
+
+        if (Objects.nonNull(filter.getStatus())) {
+            specification = specification.and(
+                    (root, query, criteriaBuilder) -> criteriaBuilder.equal(
+                            root.get("statusOrder"),
+                            filter.getStatus()
+                    )
+            );
+        }
+
 
         return this.findAll(specification, pageable);
     }

@@ -1,9 +1,12 @@
 package com.example.example.model;
 
+import com.example.example.domain.StatusOrder;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.UUID;
 
 @Data
 @Builder
@@ -12,4 +15,8 @@ import lombok.NoArgsConstructor;
 public class OrderFilter {
 
     private String orderId;
+
+    private UUID postamateId;
+
+    private StatusOrder status;
 }
