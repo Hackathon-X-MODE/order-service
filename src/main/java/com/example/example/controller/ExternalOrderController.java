@@ -2,7 +2,9 @@ package com.example.example.controller;
 
 import com.example.example.configuration.WebConstants;
 import com.example.example.model.OrderDto;
+import com.example.example.model.OrderWithMetaDto;
 import com.example.example.service.OrderExtendService;
+import com.example.example.service.OrderExternalService;
 import com.example.example.service.OrderInitService;
 import com.example.example.service.OrderStatusService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -24,6 +26,8 @@ public class ExternalOrderController {
     private final OrderStatusService orderStatusService;
 
     private final OrderExtendService orderExtendService;
+
+    private final OrderExternalService orderExternalService;
 
     @PatchMapping
     @ResponseStatus(HttpStatus.ACCEPTED)
@@ -48,6 +52,23 @@ public class ExternalOrderController {
             @PathVariable("orderId") String orderExternalId
     ) {
         return this.orderStatusService.finishWithComment(externalId, orderExternalId);
+    }
+
+
+    @Operation(summary = "Получение данных о заказе", description = "С помощью внешнего идентификатора заказа получить информацию по заказу",
+            responses = {
+                    @ApiResponse(
+                            description = "Успех",
+                            responseCode = "200",
+                            content = @Content(examples = {@ExampleObject(value = "https://hack.bigtows.org/feedback/415c2c1d9")})
+                    )
+            })
+    @GetMapping("{orderId}")
+    public OrderWithMetaDto getOrder(
+            @RequestHeader(WebConstants.Header.EXTERNAL_SYSTEM) String externalId,
+            @PathVariable("orderId") String orderExternalId
+    ) {
+        return this.orderExternalService.getExternalOrder(externalId, orderExternalId);
     }
 
     @Operation(
